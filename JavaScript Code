@@ -1,0 +1,31 @@
+Qualtrics.SurveyEngine.addOnload(function()
+{
+	var MSrows = [[1,2,3,4],[5,6],[7],[8]];  //change to the row sets you want to be in multiple response to themsleves and mutually exclusive to the rest of the question
+	
+	this.questionclick = function(event, element) {
+
+		if (element.type == 'checkbox') {
+			var selected = element.id;
+			var myArray = selected.split("~");
+			var row = parseInt(myArray[2]);
+			var that = this;
+			
+			for (var x = 0;x < MSrows.length;x++) {
+				
+				if (MSrows[x].indexOf(row) == -1) {
+						
+					for (var i = 0; i < MSrows[x].length; i++)  {
+
+						that.setChoiceAnswerValue(MSrows[x][i], false);
+						
+					}
+
+				}
+			
+			}
+		
+		}
+	
+	}
+								 
+});
